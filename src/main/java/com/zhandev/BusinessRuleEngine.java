@@ -1,25 +1,31 @@
 package com.zhandev;
 
+import com.zhandev.rule.Rule;
+
 import java.util.ArrayList;
 import java.util.List;
 
 public class BusinessRuleEngine {
 
-    private final List<Action> actions;
+    private final List<Rule> rules;
+    private final Facts facts;
 
-    public BusinessRuleEngine() {
-        this.actions = new ArrayList<>();
+    public BusinessRuleEngine(final Facts facts) {
+        this.facts = facts;
+        this.rules = new ArrayList<>();
     }
 
-    public void addAction(final Action action) {
-        this.actions.add(action);
+    public void addRule(final Rule rule) {
+        //throw new UnsupportedOperationException();  // throw this exception indicating this function is yet to be implemented
+
+        this.rules.add(rule);
     }
 
     public int count() {
-        return this.actions.size();
+        return this.rules.size();
     }
 
     public void run() {
-        this.actions.forEach(Action::execute);
+        this.rules.forEach(rule -> rule.perform(facts));
     }
 }
