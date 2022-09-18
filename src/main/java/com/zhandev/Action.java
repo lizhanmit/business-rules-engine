@@ -6,5 +6,5 @@ package com.zhandev;
 @FunctionalInterface  // Functional interface only declares a single abstract method.
 public interface Action {
 
-    void execute();
+    void execute(Facts facts);
 }
