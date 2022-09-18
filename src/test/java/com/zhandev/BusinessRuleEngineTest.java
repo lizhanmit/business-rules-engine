@@ -1,5 +1,6 @@
 package com.zhandev;
 
+import com.zhandev.rule.Rule;
 import org.junit.Test;
 import static org.mockito.Mockito.*;
 import static org.junit.Assert.assertEquals;
@@ -8,29 +9,31 @@ public class BusinessRuleEngineTest {
 
     @Test
     public void shouldHaveNoRulesInitially() {
-        final BusinessRuleEngine businessRuleEngine = new BusinessRuleEngine();
+        final BusinessRuleEngine businessRuleEngine = new BusinessRuleEngine(new Facts());
 
         assertEquals(0, businessRuleEngine.count());
     }
 
     @Test
-    public void shouldAddTwoActions() {
-        final BusinessRuleEngine businessRuleEngine = new BusinessRuleEngine();
+    public void shouldAddTwoRules() {
+        final Facts facts = new Facts();
+        final BusinessRuleEngine businessRuleEngine = new BusinessRuleEngine(facts);
 
-        businessRuleEngine.addAction(() -> {});
-        businessRuleEngine.addAction(() -> {});
+        businessRuleEngine.addRule(mock(Rule.class));
+        businessRuleEngine.addRule(mock(Rule.class));
 
         assertEquals(2, businessRuleEngine.count());
     }
 
     @Test
-    public void shouldExecuteOneAction() {
-        final BusinessRuleEngine businessRuleEngine = new BusinessRuleEngine();
-        final Action mockAction = mock(Action.class);
+    public void shouldPerformOneRuleWithFacts() {
+        final Facts mockFacts = mock(Facts.class);
+        final BusinessRuleEngine businessRuleEngine = new BusinessRuleEngine(mockFacts);
 
-        businessRuleEngine.addAction(mockAction);
+        final Rule mockRule = mock(Rule.class);
+        businessRuleEngine.addRule(mockRule);
         businessRuleEngine.run();
 
-        verify(mockAction).execute();
+        verify(mockRule).perform(mockFacts);
     }
 }
