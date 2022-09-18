@@ -13,7 +13,7 @@ You’d like to enable nonprogrammers to add or change business logic in their o
 - Facts: The available information to which rules have access.
 - Actions: The operation you want to perform.
 - Conditions: These specify when an action should be triggered.
-- Rules: These specify the business logic you want to execute, essentially grouping facts, conditions, and actions together.
+- Rules: These specify the business logic you want to execute, essentially grouping facts, conditions, and actions together. A rule is a condition and an action together.
 
 The main productivity benefit of a Business Rules Engine is that it enables rules to be maintained, executed, and tested within one place without having to integrate with a main application.
 
